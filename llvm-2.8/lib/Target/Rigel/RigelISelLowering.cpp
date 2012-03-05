@@ -137,10 +137,12 @@ RigelTargetLowering(RigelTargetMachine &TM)
   setOperationAction(ISD::VACOPY            , MVT::Other, Expand);
   setOperationAction(ISD::VAEND             , MVT::Other, Expand);
 
-  // Rigel's F2I and I2F instructions assume the integer value is signed.
-  // uint<->fp nodes need to be expanded.
-  setOperationAction(ISD::UINT_TO_FP, MVT::i32, Expand);
-  setOperationAction(ISD::FP_TO_UINT, MVT::i32, Expand);
+	//Rigel's F2I and I2F instructions cover si32->f32 and f32->si32.
+	//We need to lower ui32->f32, si32->f64, and f32->si32 to libcalls.
+	setOperationAction(ISD::SINT_TO_FP, MVT::i32, Custom);
+  setOperationAction(ISD::UINT_TO_FP, MVT::i32, Custom);
+	setOperationAction(ISD::FP_TO_SINT, MVT::f32, Legal);
+  setOperationAction(ISD::FP_TO_UINT, MVT::f32, Expand);
 
   // Rigel subword loads and stores have to be custom lowered
   // FIXME Take into account subtargets with byte ld/st
@@ -249,6 +251,71 @@ unsigned RigelTargetLowering::getFunctionAlignment(const Function *F) const {
   return 2;
 }
 
+//! Expand a library call into an actual call DAG node
+  /*!
+   \note
+   This code is taken from SelectionDAGLegalize, since it is not exposed as
+   part of the LLVM SelectionDAG API.
+   */
+
+namespace {
+  SDValue
+  ExpandLibCall(RTLIB::Libcall LC, SDValue Op, SelectionDAG &DAG,
+                bool isSigned, SDValue &Hi, const RigelTargetLowering &TLI) {
+    // The input chain to this libcall is the entry node of the function.
+    // Legalizing the call will automatically add the previous call to the
+    // dependence.
+    SDValue InChain = DAG.getEntryNode();
+
+    TargetLowering::ArgListTy Args;
+    TargetLowering::ArgListEntry Entry;
+    for (unsigned i = 0, e = Op.getNumOperands(); i != e; ++i) {
+      EVT ArgVT = Op.getOperand(i).getValueType();
+      const Type *ArgTy = ArgVT.getTypeForEVT(*DAG.getContext());
+      Entry.Node = Op.getOperand(i);
+      Entry.Ty = ArgTy;
+      Entry.isSExt = isSigned;
+      Entry.isZExt = !isSigned;
+      Args.push_back(Entry);
+    }
+    SDValue Callee = DAG.getExternalSymbol(TLI.getLibcallName(LC),
+                                           TLI.getPointerTy());
+
+    // Splice the libcall in wherever FindInputOutputChains tells us to.
+    const Type *RetTy =
+                Op.getNode()->getValueType(0).getTypeForEVT(*DAG.getContext());
+    std::pair<SDValue, SDValue> CallInfo =
+            TLI.LowerCallTo(InChain, RetTy, isSigned, !isSigned, false, false,
+                            0, TLI.getLibcallCallingConv(LC),
+                            /*isTailCall=*/false,
+                            /*isReturnValueUsed=*/true,
+                            Callee, Args, DAG, Op.getDebugLoc());
+
+    return CallInfo.first;
+  }
+}
+
+/// Lower ISD::SINT_TO_FP, ISD::UINT_TO_FP for i32
+/// i32->f32 passes through unchanged, whereas i32->f64 is expanded to a libcall.
+static SDValue LowerINT_TO_FP(SDValue Op, SelectionDAG &DAG,
+                              const RigelTargetLowering &TLI) {
+  EVT OpVT = Op.getValueType();
+  SDValue Op0 = Op.getOperand(0);
+  EVT Op0VT = Op0.getValueType();
+  bool isSigned = (Op.getOpcode() == ISD::SINT_TO_FP);
+
+  if ((isSigned && Op0VT == MVT::i32 && OpVT == MVT::f64) ||
+			(!isSigned && Op0VT == MVT::i32 && (OpVT == MVT::f64 || OpVT == MVT::f32))) {
+    // Convert i32->f64 or i32->f32 to a libcall:
+    RTLIB::Libcall LC = isSigned ? RTLIB::getSINTTOFP(Op0VT, OpVT) : RTLIB::getUINTTOFP(Op0VT, OpVT);
+    assert(LC != RTLIB::UNKNOWN_LIBCALL && "Unexpected int-to-fp conversion!");
+    SDValue Dummy;
+    return ExpandLibCall(LC, Op, DAG, false, Dummy, TLI);
+  }
+
+  return Op;
+}
+
 SDValue RigelTargetLowering::
 LowerOperation(SDValue Op, SelectionDAG &DAG) const
 {
@@ -266,6 +333,8 @@ LowerOperation(SDValue Op, SelectionDAG &DAG) const
     case ISD::JumpTable:          return LowerJumpTable(Op, DAG);
     case ISD::SELECT:             return LowerSELECT(Op, DAG);
     case ISD::VASTART:            return LowerVASTART(Op, DAG);
+    case ISD::SINT_TO_FP:
+    case ISD::UINT_TO_FP:         return LowerINT_TO_FP(Op, DAG, *this);
     //Short loads and loadexts
     case ISD::LOAD:
     case ISD::EXTLOAD:

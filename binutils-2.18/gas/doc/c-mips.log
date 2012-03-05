@@ -1,0 +1,341 @@
+This is pdfeTeXk, Version 3.14159-1.10b-2.1 (Web2C 7.4.5) (format=pdfetex 2007.4.16)  13 SEP 2007 22:59
+entering extended mode
+ file:line:error style messages enabled.
+**/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi
+(/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi{/usr/share/texmf/pdftex/co
+nfig/pdftex.cfg} [1{/usr/share/texmf/dvips/config/pdftex.map}]
+Overfull \hbox (17.96826pt too wide) in paragraph at lines 180--183
+[]/cmr10/@item -mfix-vr4130 @itemx -no-mfix-vr4130 In-sert nops to work around 
+the VR4130 @sampm-flo/@sampmfhi|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+./cmr10/@
+./cmr10/i
+./cmr10/t
+./cmr10/e
+.etc.
+
+
+Overfull \hbox (9.38493pt too wide) in paragraph at lines 199--206
+[]/cmr10/@itemx -m3900 @itemx -no-m3900 @itemx -m4100 @itemx -no-m4100 For each
+ op-tion @samp-m@varnnnn,|
+
+\hbox(6.94444+1.94444)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+./cmr10/@
+./cmr10/i
+./cmr10/t
+./cmr10/e
+.etc.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:252: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:275: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (500.47446pt too wide) in paragraph at lines 212--275
+/cmr10/4kc, 4km, 4kp, 4ksc, 4kec, 4kem, 4kep, 4ksd, m4k, m4kp, 24kc, 24kf2$[]/c
+mmi10/; /cmr10/24/cmmi10/kf; /cmr10/24/cmmi10/kf/cmr10/1[]/cmmi10/; /cmr10/24/c
+mmi10/kec; /cmr10/24/cmmi10/kef/cmr10/2[]/cmmi10/; /cmr10/24/cmmi10/kef; /cmr10
+/24/cmmi10/kef/cmr10/1[]/cmmi10/; /cmr10/34/cmmi10/kc; /cmr10/34/cmmi10/kf/cmr1
+0/2[]/cmmi10/; /cmr10/34/cmmi10/kf; /cmr10/34/cmmi10/kf/cmr10/1[]/cmmi10/; /cmr
+10/74/cmmi10/kc; /cmr10/74/cmmi10/kf/cmr10/2[]/cmmi10/; /cmr10/74/cmmi10/kf; /c
+mr10/74/cmmi10/kf/cmr10/1[]/cmmi10/; /cmr10/74/cmmi10/kf/cmr10/3[]/cmmi10/; /cm
+r10/5/cmmi10/kc; /cmr10/5/cmmi10/kf; /cmr10/20/cmmi10/kc; /cmr10/25/cmmi10/kf; 
+sb/cmr10/1/cmmi10/; sb/cmr10/1/cmmi10/a/cmr10/@/cmmi10/endquotation$ |
+
+\hbox(6.94444+1.94444)x469.75499, glue set - 1.0
+./cmr10/4
+./cmr10/k
+.\kern-0.27779
+./cmr10/c
+./cmr10/,
+.etc.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:277: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:277: Extra }, or forgotten 
+$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:279: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (135.01138pt too wide) in paragraph at lines 276--279
+[]/cmr10/For com-pat-i-bil-ity rea-sons, @samp@varnx and @samp@varbfx are ac-ce
+pted as syn-onyms for @samp@varnf1$[]/cmmi10/:Thesevaluesaredeprecated:$ |
+
+\hbox(6.94444+1.94444)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+./cmr10/F
+.\kern-0.83334
+./cmr10/o
+./cmr10/r
+.etc.
+
+
+Overfull \hbox (0.87428pt too wide) in paragraph at lines 284--287
+[]/cmr10/@item -mabi=@varabi Record which ABI the source code uses. The rec-og-
+nized ar-gu-ments are: @samp32,|
+
+\hbox(6.94444+1.94444)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+./cmr10/@
+./cmr10/i
+./cmr10/t
+./cmr10/e
+.etc.
+
+[2]
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:320: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:326: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (1267.68163pt too wide) in paragraph at lines 317--326
+/cmr10/@c (2) stop teas-ing, say $[]/cmmi10/hich[]nstructionsexpanded[]ow[]/cmr
+10/@/cmmi10/code[]automaticallymacroexpandscertaindivisionandmultiplicationinst
+ructionstocheckforoverflowanddivisionbyzero:Thisoptioncauses/cmr10/@/cmmi10/cod
+e[]togeneratecodetotakeatrapexceptionratherthanabreakexceptionwhenanerrorisdete
+cted:ThetrapinstructionsareonlysupportedatInstructionSetArchitecturelevel/cmr10
+/2/cmmi10/andhigher:$ |
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+./cmr10/@
+./cmr10/c
+.\glue 3.33333 plus 1.66666 minus 1.11111
+./cmr10/(
+./cmr10/2
+.etc.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:340: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:340: Extra }, or forgotten 
+$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:347: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (1069.66246pt too wide) in paragraph at lines 337--347
+/cmr10/by @samp-KPIC or @samp-mcall$[]/cmmi10/hared/cmr10/)/cmmi10/; gaswillnor
+mallygeneratecodewhichcangointoasharedlibrary:The/cmr10/@/cmmi10/samp[]optionte
+llsgastogeneratecodewhichusesthecallingconvention; butcannotgointoasharedlibrar
+y:Theresultingcodeisslightlymoreefficient:Thisoptiononlyaffectsthehandlingofthe
+/cmr10/@/cmmi10/samp[]and/cmr10/@/cmmi10/samp[]pseudo /cmsy10/^^@|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+./cmr10/b
+.\kern-0.27779
+./cmr10/y
+.\glue 3.33333 plus 1.66666 minus 1.11111
+./cmr10/@
+.etc.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:361: Extra }, or forgotten 
+$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:361: Missing } inserted
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:366: Extra }, or forgotten 
+$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:367: Missing } inserted
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:368: Extra }, or forgotten 
+$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:369: Missing } inserted
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (18.95485pt too wide) in paragraph at lines 359--375
+/cmr10/dressed via @code$/cmmi10/gp/cmr10/; /cmmi10/thedefaultvalueis/cmr10/8/c
+mmi10/; meaningthatareferencetoanyobjecteightbytesorsmalleruses/cmr10/@/cmmi10/
+code[]$/cmr10/gp.|
+
+\hbox(6.94444+1.94444)x469.75499, glue set - 1.0
+./cmr10/d
+./cmr10/r
+./cmr10/e
+./cmr10/s
+./cmr10/s
+.etc.
+
+
+Overfull \hbox (121.40407pt too wide) in paragraph at lines 359--375
+/cmr10/Pass-ing @samp-G 0 to @code@valueAS pre-vents it from us-ing the @code$/
+cmmi10/gpregisteronthebasisofobjectsize/cmr10/(/cmmi10/buttheassembleruses/cmr1
+0/@/cmmi10/code[]$/cmr10/gp|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+./cmr10/P
+.\kern-0.27779
+./cmr10/a
+./cmr10/s
+./cmr10/s
+.etc.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:377: Extra }, or forgotten 
+$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:379: Missing } inserted
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (509.30775pt too wide) in paragraph at lines 376--380
+[]/cmr10/Using small @sce-coff ob-jects re-quires linker sup-port, and as-sumes
+ that the @code$/cmmi10/gpregisteriscorrectlyinitialized/cmr10/(/cmmi10/normall
+ydoneautomaticallybythestartupcode/cmr10/)/cmmi10/:/cmr10/@/cmmi10/sc[]/cmr10/@
+/cmmi10/sc[]assemblycodemustnotmodifythe/cmr10/@/cmmi10/code[]$/cmr10/gp|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+./cmr10/U
+./cmr10/s
+./cmr10/i
+./cmr10/n
+.etc.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:403: Extra }, or forgotten 
+$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:404: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:413: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:420: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+[3]
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:492: Extra }, or forgotten 
+$
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+/scr/jkelm2/rigel/binutils-2.18/gas/doc/c-mips.texi:494: Missing $ inserted
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (139.72745pt too wide) in paragraph at lines 486--494
+/cmr10/mod-i-fier (e.g., @codeli.e $4/cmmi10/; /cmr10/1000)/cmmi10/:Thedirectiv
+e/cmr10/@/cmmi10/code[]maybeusedtoonceagainautomaticallyextendinstructionswhenn
+ecessary:$ |
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+./cmr10/m
+./cmr10/o
+.\kern0.27779
+./cmr10/d
+.\discretionary
+../cmr10/-
+.etc.
+
+[4]
+Overfull \hbox (5.38252pt too wide) in paragraph at lines 562--570
+[]/cmr10/@cindex MIPS DSP Re-lease 2 in-struc-tion gen-er-a-tion over-ride @kin
+dex @code.set dspr2 @kindex @code.set|
+
+\hbox(6.94444+1.94444)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+./cmr10/@
+./cmr10/c
+./cmr10/i
+./cmr10/n
+.etc.
+
+)
+*
+(Please type a command or say `\end')
+*\end
+[5]
+(\end occurred inside a group at level 4)
+
+### simple group (level 4) entered at line 492 ({)
+### simple group (level 3) entered at line 403 ({)
+### simple group (level 2) entered at line 340 ({)
+### simple group (level 1) entered at line 277 ({)
+### bottom level{/usr/share/texmf/dvips/tetex/bbad153f.enc}</usr/share/texmf/fo
+nts/type1/bluesky/cm/cmsy10.pfb>{/usr/share/texmf/dvips/tetex/aae443f0.enc}</us
+r/share/texmf/fonts/type1/bluesky/cm/cmmi7.pfb></usr/share/texmf/fonts/type1/bl
+uesky/cm/cmmi10.pfb>{/usr/share/texmf/dvips/tetex/f7b6d320.enc}</usr/share/texm
+f/fonts/type1/bluesky/cm/cmr7.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr1
+0.pfb>
+Output written on c-mips.pdf (5 pages, 57294 bytes).

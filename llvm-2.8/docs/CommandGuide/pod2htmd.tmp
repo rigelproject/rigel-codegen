@@ -1,0 +1,26 @@
+.
+.
+lli ./lli.pod:
+llvm-bcanalyzer ./llvm-bcanalyzer.pod:
+llvmgxx ./llvmgxx.pod:
+llvm-nm ./llvm-nm.pod:
+llvmgcc ./llvmgcc.pod:
+opt ./opt.pod:
+html ./html:
+llvm-diff ./llvm-diff.pod:
+llvm-link ./llvm-link.pod:
+lit ./lit.pod:
+llvm-ar ./llvm-ar.pod:
+llc ./llc.pod:
+tblgen ./tblgen.pod:
+llvm-config ./llvm-config.pod:
+llvmc ./llvmc.pod:
+llvm-extract ./llvm-extract.pod:
+llvm-as ./llvm-as.pod:
+llvm-prof ./llvm-prof.pod:
+bugpoint ./bugpoint.pod:./bugpoint.pod:
+index ./index.pod:
+llvm-ranlib ./llvm-ranlib.pod:
+FileCheck ./FileCheck.pod:./FileCheck.pod:
+llvm-dis ./llvm-dis.pod:
+llvm-ld ./llvm-ld.pod:

@@ -1,0 +1,6 @@
+In FreeBSD9, the gettext symbols used in the intl/ and bfd/ subfolders are in libintl and libiconv, which are installed to /usr/local.
+In Linux, these symbols are provided by glibc, and we don't need to do anything special to use them.
+In lieu of reworking the binutils autotools scripts to handle both cases seamlessly, as has been done in binutils mainline
+since we diverged at 2.18, we offer the following additional arguments and environment variables to build.sh:
+
+MAKE=gmake EXTRA_BINUTILS_CONFIGURE_ARGS="--with-libiconv-prefix=/usr/local --with-libintl-prefix=/usr/local" CPPFLAGS="-I/usr/local/include" LDFLAGS="-L/usr/local/lib -lintl -liconv" ./build.sh 

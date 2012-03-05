@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Llvm_executionengine.html">
+<link rel="next" href="Llvm_target.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Llvm" rel="Chapter" href="Llvm.html">
+<link title="Llvm_analysis" rel="Chapter" href="Llvm_analysis.html">
+<link title="Llvm_bitreader" rel="Chapter" href="Llvm_bitreader.html">
+<link title="Llvm_bitwriter" rel="Chapter" href="Llvm_bitwriter.html">
+<link title="Llvm_executionengine" rel="Chapter" href="Llvm_executionengine.html">
+<link title="Llvm_scalar_opts" rel="Chapter" href="Llvm_scalar_opts.html">
+<link title="Llvm_target" rel="Chapter" href="Llvm_target.html"><title>Llvm_scalar_opts</title>
+</head>
+<body>
+<div class="navbar"><a href="Llvm_executionengine.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Llvm_target.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Llvm_scalar_opts.html">Llvm_scalar_opts</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Llvm_scalar_opts: <code class="code"><span class="keyword">sig</span></code> <a href="Llvm_scalar_opts.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>Scalar Transforms.
+<p>
+
+    This interface provides an ocaml API for LLVM scalar transforms, the
+    classes in the <code class="code"><span class="constructor">LLVMScalarOpts</span></code> library.<br>
+<hr width="100%">
+<pre><span class="keyword">val</span> <a name="VALadd_constant_propagation"></a>add_constant_propagation : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createConstantPropogationPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_sccp"></a>add_sccp : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createSCCPPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_dead_store_elimination"></a>add_dead_store_elimination : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See <code class="code">llvm::createDeadStoreEliminationPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_aggressive_dce"></a>add_aggressive_dce : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See The <code class="code">llvm::createAggressiveDCEPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_scalar_repl_aggregation"></a>add_scalar_repl_aggregation : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createScalarReplAggregatesPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_ind_var_simplification"></a>add_ind_var_simplification : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createIndVarSimplifyPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_instruction_combination"></a>add_instruction_combination : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createInstructionCombiningPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_licm"></a>add_licm : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createLICMPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_loop_unswitch"></a>add_loop_unswitch : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createLoopUnswitchPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_loop_unroll"></a>add_loop_unroll : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createLoopUnrollPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_loop_rotation"></a>add_loop_rotation : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createLoopRotatePass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_loop_index_split"></a>add_loop_index_split : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createLoopIndexSplitPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_memory_to_register_promotion"></a>add_memory_to_register_promotion : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createPromoteMemoryToRegisterPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_memory_to_register_demotion"></a>add_memory_to_register_demotion : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createDemoteMemoryToRegisterPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_reassociation"></a>add_reassociation : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createReassociatePass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_jump_threading"></a>add_jump_threading : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createJumpThreadingPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_cfg_simplification"></a>add_cfg_simplification : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createCFGSimplificationPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_tail_call_elimination"></a>add_tail_call_elimination : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createTailCallEliminationPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_gvn"></a>add_gvn : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createGVNPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_memcpy_opt"></a>add_memcpy_opt : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createMemCpyOptPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_loop_deletion"></a>add_loop_deletion : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createLoopDeletionPass</code> function.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALadd_lib_call_simplification"></a>add_lib_call_simplification : <code class="type">[< <a href="Llvm.PassManager.html#TYPEany">Llvm.PassManager.any</a> ] <a href="Llvm.PassManager.html#TYPEt">Llvm.PassManager.t</a> -> unit</code></pre><div class="info">
+See the <code class="code">llvm::createSimplifyLibCallsPass</code> function.<br>
+</div>
+</body></html>

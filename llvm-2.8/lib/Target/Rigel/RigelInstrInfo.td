@@ -438,6 +438,15 @@ class MulDiv<bits<6> func, string instr_asm, InstrItinClass itin>:
       !strconcat(instr_asm, " $a, $b"), 
       [], itin>;
 
+// for FMADD, FMSUB, etc.
+class FPU4Op<bits<6> func, string instr_asm, InstrItinClass itin>: 
+  FR< 0x00, 
+      func, 
+      (outs FPRegs:$dest),
+      (ins FPRegs:$a, FPRegs:$b, FPRegs: $c), 
+      !strconcat(instr_asm, " $a, $b, $c, $a"), 
+      [], itin>;
+
 class FMulDiv3Op<bits<6> func, string instr_asm, InstrItinClass itin>: 
   FR< 0x00, 
       func, 
@@ -740,6 +749,10 @@ def FABS    : FMulDiv2Op<0x1c, "fabs", IIFAlu>;
 def FMRS    : FMulDiv2Op<0x1c, "fmrs", IIFAlu>;
 def FRSQRT  : FMulDiv2Op<0x1c, "frsq", IIFAlu>;
 
+let Constraints = "$a = $dest" in {
+  def FMADD   : FPU4Op<0x1c, "fmadd", IIFAlu>;
+}
+
 def F2I     : F2IClass<0x1c, "f2i", IIImul>;
 def I2F     : I2FClass<0x1c, "i2f", IIImul>;
 
@@ -851,6 +864,10 @@ def : Pat<(f32 (fsub FPRegs:$a, FPRegs:$b)),
 //is unnecessary
 def : Pat<(fdiv FPRegs:$a, FPRegs:$b), 
 	(FMUL FPRegs:$a, (FRCP FPRegs:$b))>;
+
+// FMADD
+def : Pat<(f32 (fadd (fmul FPRegs:$b,FPRegs:$c), FPRegs:$a) ),
+          (FMADD FPRegs:$a, FPRegs:$b, FPRegs:$c)>;
 
 //===---------===//
 //  Branches

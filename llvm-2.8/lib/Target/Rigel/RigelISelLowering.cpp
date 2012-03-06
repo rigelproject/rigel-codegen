@@ -138,11 +138,13 @@ RigelTargetLowering(RigelTargetMachine &TM)
   setOperationAction(ISD::VAEND             , MVT::Other, Expand);
 
 	//Rigel's F2I and I2F instructions cover si32->f32 and f32->si32.
-	//We need to lower ui32->f32, si32->f64, and f32->si32 to libcalls.
+	//We need to lower ui32->f32, si32->f64, and f32->ui32 to libcalls.
+  //The latter is handled by 'Expand', the former 2 by 'Custom' code
+  //in LowerINT_TO_FP() below.
 	setOperationAction(ISD::SINT_TO_FP, MVT::i32, Custom);
   setOperationAction(ISD::UINT_TO_FP, MVT::i32, Custom);
-	setOperationAction(ISD::FP_TO_SINT, MVT::f32, Legal);
-  setOperationAction(ISD::FP_TO_UINT, MVT::f32, Expand);
+	setOperationAction(ISD::FP_TO_SINT, MVT::i32, Legal);
+  setOperationAction(ISD::FP_TO_UINT, MVT::i32, Expand);
 
   // Rigel subword loads and stores have to be custom lowered
   // FIXME Take into account subtargets with byte ld/st
@@ -296,7 +298,8 @@ namespace {
 }
 
 /// Lower ISD::SINT_TO_FP, ISD::UINT_TO_FP for i32
-/// i32->f32 passes through unchanged, whereas i32->f64 is expanded to a libcall.
+/// signed i32->f32 passes through unchanged, unsigned i32->f32 or
+/// any i32->f64 is expanded to a libcall.
 static SDValue LowerINT_TO_FP(SDValue Op, SelectionDAG &DAG,
                               const RigelTargetLowering &TLI) {
   EVT OpVT = Op.getValueType();
@@ -304,10 +307,12 @@ static SDValue LowerINT_TO_FP(SDValue Op, SelectionDAG &DAG,
   EVT Op0VT = Op0.getValueType();
   bool isSigned = (Op.getOpcode() == ISD::SINT_TO_FP);
 
+  //Let's call signed i32 's32' and unsigned i32 'u32'.
+  //Convert s32->f64, u32->f32, and u32->f64 to libcalls 
   if ((isSigned && Op0VT == MVT::i32 && OpVT == MVT::f64) ||
 			(!isSigned && Op0VT == MVT::i32 && (OpVT == MVT::f64 || OpVT == MVT::f32))) {
-    // Convert i32->f64 or i32->f32 to a libcall:
-    RTLIB::Libcall LC = isSigned ? RTLIB::getSINTTOFP(Op0VT, OpVT) : RTLIB::getUINTTOFP(Op0VT, OpVT);
+    RTLIB::Libcall LC = isSigned ? RTLIB::getSINTTOFP(Op0VT, OpVT)
+                                 : RTLIB::getUINTTOFP(Op0VT, OpVT);
     assert(LC != RTLIB::UNKNOWN_LIBCALL && "Unexpected int-to-fp conversion!");
     SDValue Dummy;
     return ExpandLibCall(LC, Op, DAG, false, Dummy, TLI);

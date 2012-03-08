@@ -699,6 +699,7 @@ def SRLI     : LogicR_shift_imm<0x02, "srli", srl>;
 def SRAI     : LogicR_shift_imm<0x03, "srai", sra>;
 
 // Load Upper Immediate
+let neverHasSideEffects = 1 in
 def MVUi     : LoadUpper<0x0f, "mvui">;
 
 // Sign extension
@@ -741,6 +742,8 @@ def JMPR    : JumpFR<0x00, 0x08, "jmpr">;
 def JAL     : JumpLink<0x03, "ljl">;
 def JALR    : JumpLinkReg<0x03, "jalr">; 
 
+
+let neverHasSideEffects = 1 in {
 def FMUL    : FMulDiv3Op<0x1c, "fmul", IIFAlu>;
 def FADD    : FMulDiv3Op<0x1c, "fadd", IIFAlu>;
 def FSUB    : FMulDiv3OpRev<0x1c, "fsub", IIFAlu>;
@@ -752,14 +755,18 @@ def FRSQRT  : FMulDiv2Op<0x1c, "frsq", IIFAlu>;
 let Constraints = "$a = $dest" in {
   def FMADD   : FPU4Op<0x1c, "fmadd", IIFAlu>;
 }
+} //neverHasSideEffects = 1
 
 def F2I     : F2IClass<0x1c, "f2i", IIImul>;
 def I2F     : I2FClass<0x1c, "i2f", IIImul>;
 
+let neverHasSideEffects = 1 in {
 def CTLZ : CountLeading<0x20, "clz">;
 
-let addr=0 in
+let addr = 0 in
 def NOP     : FJ<0, (outs), (ins), "nop", [], IIAlu>;
+
+} //neverHasSideEffects = 1
 
 // Ret instruction - as rigel does not have "ret" a 
 // jmpr $ra must be generated.

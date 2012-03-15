@@ -25,6 +25,7 @@
 #include "llvm/CodeGen/MachineFunction.h"
 #include "llvm/CodeGen/MachineFrameInfo.h"
 #include "llvm/CodeGen/MachineLocation.h"
+#include "llvm/CodeGen/RegisterScavenging.h"
 #include "llvm/Target/TargetFrameInfo.h"
 #include "llvm/Target/TargetMachine.h"
 #include "llvm/Target/TargetOptions.h"
@@ -99,26 +100,13 @@ getCalleeSavedRegs(const MachineFunction *MF) const
   return CalleeSavedRegs;
 }
 
-/// Rigel Callee Saved Register Classes
-const TargetRegisterClass* const* 
-RigelRegisterInfo::getCalleeSavedRegClasses(const MachineFunction *MF) const 
-{
-  static const TargetRegisterClass * const CalleeSavedRegClasses[] = {
-    &Rigel::CPURegsRegClass, &Rigel::CPURegsRegClass,
-    &Rigel::CPURegsRegClass, &Rigel::CPURegsRegClass,
-    &Rigel::CPURegsRegClass, &Rigel::CPURegsRegClass,
-    &Rigel::CPURegsRegClass, &Rigel::CPURegsRegClass, 0 
-  };
-  return CalleeSavedRegClasses;
-}
-
 BitVector RigelRegisterInfo::
 getReservedRegs(const MachineFunction &MF) const
 {
   BitVector Reserved(getNumRegs());
   Reserved.set(Rigel::ZERO);
-  Reserved.set(Rigel::AT);
- // Reserved.set(Rigel::GP); //Testing out scavenging $GP
+ // Reserved.set(Rigel::AT); //$AT is always scavenged.
+ // Reserved.set(Rigel::GP); //$GP is always scavenged for now.  FIXME for PIC support
   Reserved.set(Rigel::SP);
   Reserved.set(Rigel::FP);
   Reserved.set(Rigel::RA);
@@ -294,19 +282,22 @@ DEBUG(errs()  << __FILE__ << "@" << __LINE__ << " Calling: " << __FUNCTION__ << 
 
   MachineBasicBlock &MBB = *MI.getParent();
 
-  // these 2 instrs get Offset into AT
-  // FIXME do we need to use AT, or can we let the register allocator decide?
-  BuildMI(MBB, II, dl, TII.get(Rigel::MVUi), Rigel::AT)
+  // these 2 instrs get Offset into temporary register
+	// we try to scavenge a register, else use AT
+	unsigned tmpReg;
+	if(!findScratchRegister(II, RS, Rigel::CPURegsRegisterClass, SPAdj, tmpReg))
+		tmpReg = Rigel::AT;
+  BuildMI(MBB, II, dl, TII.get(Rigel::MVUi), tmpReg)
     .addImm(Offset >> 16);
-  BuildMI(MBB, II, dl, TII.get(Rigel::ORi), Rigel::AT)
-    .addReg(Rigel::AT, getKillRegState(true))
+  BuildMI(MBB, II, dl, TII.get(Rigel::ORi), tmpReg)
+    .addReg(tmpReg, getKillRegState(true))
     .addImm(Offset & 0xFFFF);
-  // add SP + Offset, result in AT
-  BuildMI(MBB, II, dl, TII.get(Rigel::ADD), Rigel::AT)
-    .addReg(Rigel::SP).addReg(Rigel::AT);
+  // add SP + Offset, result in tmpReg
+  BuildMI(MBB, II, dl, TII.get(Rigel::ADD), tmpReg)
+    .addReg(Rigel::SP).addReg(tmpReg);
 
-  // change base reg to AT from SP, AT now has the total of SP + Offset
-  MI.getOperand(FIOperandNum).ChangeToRegister(Rigel::AT,false);
+  // change base reg to tmpReg from SP, tmpReg now has the total of SP + Offset
+  MI.getOperand(FIOperandNum).ChangeToRegister(tmpReg, false);
   MI.getOperand(OffsetOperandNum).ChangeToImmediate(0);
 }
 
@@ -337,8 +328,8 @@ emitPrologue(MachineFunction &MF) const
   BuildMI(MBB, MBBI, dl, TII.get(Rigel::NOREORDER));
   
   // Adjust stack : addi sp, sp, (-imm)
-  // Need to materialize the offset using MVUI+ORI if
-  // stack size > 64k
+  // Need to materialize the offset using MVUI+ORI in a
+	// temporary register if stack size > 64k
   if (isInt<16>(StackSize)) {
     BuildMI(MBB, MBBI, dl, TII.get(Rigel::ADDi), Rigel::SP)
       .addReg(Rigel::SP).addImm(-StackSize);
@@ -418,6 +409,9 @@ emitEpilogue(MachineFunction &MF, MachineBasicBlock &MBB) const
 
   // Restore the return address only if the function isnt a leaf one.
   // lw  $ra, stack_loc($sp)
+	// We don't have a RegScavenger here, so we use AT explicitly.
+	// We do define it as a kill/def though, so the register allocator
+	// should still be able to use AT.
   if (MFI->hasCalls()) { 
     if (isInt<16>(RAOffset)){
       BuildMI(MBB, MBBI, dl, TII.get(Rigel::LW))
@@ -490,6 +484,20 @@ int RigelRegisterInfo::
 getDwarfRegNum(unsigned RegNum, bool isEH) const {
   assert(0 && "What is the dwarf register number");
   return -1;
+}
+
+bool
+RigelRegisterInfo::findScratchRegister(MachineBasicBlock::iterator II,
+                                       RegScavenger *RS,
+                                       const TargetRegisterClass *RC,
+                                       int SPAdj, unsigned &ret) const
+{
+	if(!RS)
+		return false;
+  ret = RS->FindUnusedReg(RC);
+  if (ret == 0)
+    ret = RS->scavengeRegister(RC, II, SPAdj);
+	return (ret == 0);
 }
 
 #include "RigelGenRegisterInfo.inc"

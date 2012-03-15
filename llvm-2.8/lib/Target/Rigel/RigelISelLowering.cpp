@@ -1521,7 +1521,8 @@ getRegClassForInlineAsmConstraint(const std::string &Constraint,
     case 'r':
       return make_vector<unsigned>(Rigel::T0, Rigel::T1, Rigel::T2, Rigel::T3, 
              Rigel::T4, Rigel::T5, Rigel::S0, Rigel::S1, 
-             Rigel::S2, Rigel::S3, Rigel::S4, Rigel::S5, Rigel::S6, Rigel::S7, 
+             Rigel::S2, Rigel::S3, Rigel::S4, Rigel::S5, Rigel::S6, Rigel::S7,
+						 Rigel::K0, Rigel::K1, Rigel::GP, Rigel::AT, //FIXME GP should only be enabled for non-PIC.
              0);
   }
   return std::vector<unsigned>();

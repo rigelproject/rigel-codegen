@@ -403,11 +403,9 @@ class JumpFR<bits<6> op, bits<6> func, string instr_asm>:
       [(brind CPURegs:$target)], IIBranch>;
 
 // Jump and Link (Call)
-//All calls clobber caller-saved registers.
-//FIXME Do we need to define any Uses for call instrs?
-//Mips Uses GP.
-//TODO Can we reclaim K0/K1/AT?
-let isCall=1, Defs = [ AT, K0, K1, V0, V1, GP, A0, A1, A2, A3, A4, A5, A6, A7,
+//Calls clobber non-callee-saved registers.
+//FIXME May need to declare GP as a Use when we support PIC
+let isCall=1, Defs = [ AT, V0, V1, A0, A1, A2, A3, A4, A5, A6, A7, K0, K1, GP,
                        T0, T1, T2, T3, T4, T5]
               in {
 

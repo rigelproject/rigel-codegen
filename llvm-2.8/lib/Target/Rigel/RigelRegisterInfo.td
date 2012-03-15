@@ -63,15 +63,11 @@ let Namespace = "Rigel" in {
 
 // CPU Registers Class
 def CPURegs : RegisterClass<"Rigel", [i32], 32, 
-  // Return Values and Arguments
-  [V0, V1, 
-   A0, A1, A2, A3, A4, A5, A6, A7,
-  // Not preserved across procedure calls
-   T0, T1, T2, T3, T4, T5,
-  // Callee save
-   S0, S1, S2, S3, S4, S5, S6, S7,
-  // Reserved
-   K0, K1, GP, ZERO, AT, SP, FP, RA
+  // Allocate scratch registers first, then callee-saved registers
+  [T0, T1, T2, T3, T4, T5, K0, K1, GP, AT, //FIXME GP should be reserved under PIC
+   A0, A1, A2, A3, A4, A5, A6, A7, V0, V1,
+   S0, S1, S2, S3, S4, S5, S6, S7, //Callee-saved
+   ZERO, SP, FP, RA //Reserved
   ]>
 {
   let MethodProtos = [{
@@ -80,22 +76,19 @@ def CPURegs : RegisterClass<"Rigel", [i32], 32,
   let MethodBodies = [{
     CPURegsClass::iterator
     CPURegsClass::allocation_order_end(const MachineFunction &MF) const {
-      // The last 5 registers on the list above are reserved, can allocate through GP.
-      return end()-5;
+      // The last 4 registers on the list above are reserved, can allocate through S7.
+      return end()-4;
     }
   }];
 }
 
 //FIXME Should not need a separate RC for FP
 def FPRegs : RegisterClass<"Rigel", [f32], 32, 
-  [V0, V1, 
-   A0, A1, A2, A3, A4, A5, A6, A7,
-  // Not preserved across procedure calls
-   T0, T1, T2, T3, T4, T5,
-  // Callee save
-   S0, S1, S2, S3, S4, S5, S6, S7,
-  // Reserved
-   K0, K1, GP, ZERO, AT, SP, FP, RA
+  // Allocate scratch registers first, then callee-saved registers
+  [T0, T1, T2, T3, T4, T5, K0, K1, GP, AT, //FIXME GP should be reserved under PIC
+   A0, A1, A2, A3, A4, A5, A6, A7, V0, V1, 
+   S0, S1, S2, S3, S4, S5, S6, S7, //Callee-saved
+   ZERO, SP, FP, RA //Reserved
   ]>
 {
   let MethodProtos = [{
@@ -104,8 +97,8 @@ def FPRegs : RegisterClass<"Rigel", [f32], 32,
   let MethodBodies = [{
     FPRegsClass::iterator
     FPRegsClass::allocation_order_end(const MachineFunction &MF) const {
-      // The last 5 registers on the list above are reserved, can allocate through GP.
-      return end()-5;
+      // The last 4 registers on the list above are reserved, can allocate through S7.
+      return end()-4;
     }
   }];
 }

@@ -36,11 +36,8 @@ struct RigelRegisterInfo : public RigelGenRegisterInfo {
   /// Adjust the stack frame.
   void adjustRigelStackFrame(MachineFunction &MF) const;
 
-  /// Code Generation virtual methods...
+  /// Code generation virtual methods
   const unsigned *getCalleeSavedRegs(const MachineFunction* MF = 0) const;
-
-  const TargetRegisterClass* const*
-  getCalleeSavedRegClasses(const MachineFunction* MF = 0) const;
 
   BitVector getReservedRegs(const MachineFunction &MF) const;
 
@@ -68,6 +65,12 @@ struct RigelRegisterInfo : public RigelGenRegisterInfo {
   unsigned getEHHandlerRegister() const;
 
   int getDwarfRegNum(unsigned RegNum, bool isEH) const;
+	// Acquire an unused register in an emergency.
+  bool findScratchRegister(MachineBasicBlock::iterator II,
+                               RegScavenger *RS,
+                               const TargetRegisterClass *RC,
+                               int SPAdj,
+															 unsigned &ret) const;
 };
 
 } // end namespace llvm

@@ -221,7 +221,8 @@ void RigelRegisterInfo::adjustRigelStackFrame(MachineFunction &MF) const
 // if frame pointer elimination is disabled.
 bool RigelRegisterInfo::
 hasFP(const MachineFunction &MF) const {
-  return (NoFramePointerElim || MF.getFrameInfo()->hasVarSizedObjects());
+  const MachineFrameInfo *MFI = MF.getFrameInfo();
+  return DisableFramePointerElim(MF) || MFI->hasVarSizedObjects();
 }
 
 // This function eliminate ADJCALLSTACKDOWN, 

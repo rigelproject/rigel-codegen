@@ -64,3 +64,13 @@ addPreEmitPass(PassManagerBase &PM, CodeGenOpt::Level OptLevel)
 {
   return true;
 }
+
+bool RigelTargetMachine::
+addPreSched2(PassManagerBase &PM, CodeGenOpt::Level OptLevel)
+{
+  // Expand some pseudo instructions into multiple instructions to allow
+  // proper scheduling.
+  PM.add(createRigelExpandPseudoPass());
+	  return true;
+}
+

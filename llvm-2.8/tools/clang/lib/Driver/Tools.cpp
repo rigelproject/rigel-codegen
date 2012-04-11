@@ -3373,7 +3373,9 @@ void rigel::Link::ConstructJob(Compilation &C, const JobAction &JA,
 	//These 3 libraries should be more or less independent of libc, so it shouldn't matter much
 	//if we put them before or after libc.  We'll do 'before' though, in case we want to have one
 	//of them printf() for debug or something.
-  if (getToolChain().getDriver().CCCIsCXX) {
+  if (!Args.hasArg(options::OPT_nostdlib) &&
+			!Args.hasArg(options::OPT_nodefaultlibs) &&
+			getToolChain().getDriver().CCCIsCXX) {
 		CmdArgs.push_back("-lcxxrt");
 		CmdArgs.push_back("-lunwind"); //libcxxrt depends on libunwind
 	  CmdArgs.push_back("-lpthread"); //libcxxrt and libunwind (a bit) depend on libpthread

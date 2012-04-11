@@ -27,6 +27,7 @@ namespace llvm {
 //  FunctionPass *createRigelDelaySlotFillerPass(RigelTargetMachine &TM);
   //FunctionPass *createRigelCodePrinterPass(raw_ostream &OS, 
                                           //RigelTargetMachine &TM);
+	FunctionPass *createRigelExpandPseudoPass();
   extern Target TheRigelTarget;
   //extern Target TheRigelelTarget;
 } // end namespace llvm;

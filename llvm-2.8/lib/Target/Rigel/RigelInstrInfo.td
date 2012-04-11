@@ -791,12 +791,28 @@ def : Pat<(i32 immZExt16:$in),
 // Upper-halfword-only immediates
 def : Pat<(i32 immUpperHalfword:$in),
           (MVUi (HI16 imm:$in)) >;
+
+/// Split a 32-bit immediate into two 16 bit parts.
+def hi16 : SDNodeXForm<imm, [{
+  return CurDAG->getTargetConstant((uint32_t)N->getZExtValue() >> 16, MVT::i32);
+}]>;
+
+def lo16 : SDNodeXForm<imm, [{
+  return CurDAG->getTargetConstant((uint32_t)N->getZExtValue() & 0xFFFFUL, MVT::i32);
+}]>;
+
 // Large immediates
-// NOTE: This doesn't use ADDiu like most of the other ones because
-// we can't rely on the assembler to manipulate %hi and %lo to deal
-// with the sign-extendedness of the 'addi' instruction.
-def imm32 : Pat<(i32 imm:$imm),
-          (ORi (MVUi (HI16 imm:$imm)), (LO16 imm:$imm))>;
+// This is a single pseudo instruction modeled after MOVi32imm in ARM.
+// the benefit is that it can be remat'd
+// as a single unit instead of having to handle reg inputs, so we can hoist these
+// out of loops (see Bugzilla bug 93).
+// FIXME: Remove this when we can do generalized remat.
+let isReMaterializable = 1 in
+def MOVi32imm : FR<0x00, 0x02, (outs CPURegs:$dst), (ins i32imm:$src),
+                   "\tmvui $dst, ${src:hi16}\n\tori\t$dst, ${src:lo16}",
+                     [(set CPURegs:$dst, (i32 imm:$src))], IIAlu>;
+//def imm32 : Pat<(i32 imm:$imm),
+//          (ORi (MVUi (HI16 imm:$imm)), (LO16 imm:$imm))>;
 
 def : Pat<(RigelJmpLink (i32 tglobaladdr:$dst)),
           (JAL tglobaladdr:$dst)>;

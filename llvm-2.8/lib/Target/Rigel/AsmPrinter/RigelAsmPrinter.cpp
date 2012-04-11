@@ -61,6 +61,7 @@ namespace {
     bool PrintAsmMemoryOperand(const MachineInstr *MI, unsigned OpNo, 
                          unsigned AsmVariant, const char *ExtraCode, raw_ostream &O);
     void printOperand(const MachineInstr *MI, int opNum, raw_ostream &O);
+    void printOperand(const MachineInstr *MI, int opNum, raw_ostream &O, const char *Modifier);
     void printUnsignedImm(const MachineInstr *MI, int opNum, raw_ostream &O);
     void printMemOperand(const MachineInstr *MI, int opNum, raw_ostream &O, 
                          const char *Modifier = 0);
@@ -291,6 +292,15 @@ void RigelAsmPrinter:: printOperand(const MachineInstr *MI, int opNum,
       llvm_unreachable("<unknown operand type>"); 
   }
 }
+
+void RigelAsmPrinter:: printOperand(const MachineInstr *MI, int opNum,
+        raw_ostream &O, const char *Modifier)
+{
+  llvm_unreachable("printOperand() with modifiers not supported yet;"
+                   " pseudo-instructions with modifiers should be expanded in C++"
+                   " before reaching the ASM printer");
+  printOperand(MI, opNum, O);
+} 
 
 void RigelAsmPrinter:: printUnsignedImm(const MachineInstr *MI, int opNum,
 			raw_ostream &O) 
